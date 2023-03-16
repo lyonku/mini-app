@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "Averta CY";
+  src: url("./fonts/AvertaCyrillicRegular.otf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Averta CY";
+  src: url("./fonts/AvertaCyrillicBold.otf") format("truetype");
+  font-style: normal;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Averta CY";
+  src: url("./fonts/AvertaCyrillicBlack.otf") format("truetype");
+  font-style: normal;
+  font-weight: 800;
+}

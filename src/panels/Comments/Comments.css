@@ -1,0 +1,737 @@
+body {
+  overflow-y: hidden;
+  /* position: relative; */
+  background-color: #ffffff;
+}
+
+.comments {
+  height: 100%;
+}
+
+.wrap {
+  height: 1px;
+}
+
+.comments__header {
+  position: absolute;
+  width: 100%;
+  padding: 10px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0px 24px 48px rgba(0, 18, 102, 0.08);
+  z-index: 999;
+}
+
+.header-back {
+  cursor: pointer;
+  width: 36px;
+}
+
+.member-logo {
+  height: 36px;
+}
+
+.member-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.member-title {
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: "salt" on;
+  color: #141a33;
+}
+
+.member-about {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.member-reviews {
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  font-feature-settings: "salt" on;
+  color: #a9abb8;
+}
+
+.member-delimetr {
+  width: 2px;
+  height: 2px;
+  background: #dddde3;
+  border-radius: 100%;
+}
+
+.member-representatives {
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  font-feature-settings: "salt" on;
+  color: #37c99e;
+}
+
+@keyframes show {
+  0% {
+    transform: translateY(1000px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes hide {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(1000px);
+  }
+}
+
+.comments__feedback {
+  max-height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 24px 16px 34px 16px;
+  position: absolute;
+  bottom: 0px;
+  background: #ffffff;
+  border-radius: 20px 20px 0px 0px;
+  z-index: 3;
+  box-shadow: 0px -24px 48px rgba(0, 18, 102, 0.06);
+  transform: translateY(1000px);
+  overflow: auto;
+}
+
+.comments__feedback::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f9f9fd00;
+}
+
+.comments__feedback::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #dddde3;
+}
+
+.comments__feedback::-webkit-scrollbar-track {
+  background-color: #ffffff00;
+}
+
+.active {
+  animation: show 1s;
+  animation-fill-mode: forwards;
+}
+
+.back::before {
+  transition: width 4s;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.178);
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.inactive {
+  animation: hide 1s;
+  animation-fill-mode: forwards;
+}
+
+.feedback-title {
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 26px;
+  text-align: center;
+  letter-spacing: -0.92px;
+  font-feature-settings: "salt" on;
+  color: #141a33;
+  margin-bottom: 20px;
+}
+
+.feedback-textarea {
+  width: 100%;
+}
+
+.feedback-textarea-input {
+  resize: none;
+  box-sizing: border-box;
+  width: 100%;
+  height: 132px;
+  border: 1px solid #37c99e;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.12px;
+  color: #141a33;
+  overflow-y: hidden;
+  padding: 16px;
+}
+
+.feedback-submit {
+  width: 100%;
+}
+
+.feedback-submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  font-feature-settings: "salt" on;
+  color: #ffffff;
+  width: 100%;
+  height: 60px;
+  background: #37c99e;
+  border-radius: 14px;
+  border: 0;
+  margin-bottom: 6px;
+}
+
+.feedback-submit-btn:active {
+  background: #3bdbab;
+}
+
+.feedback-cancel {
+  width: 100%;
+}
+
+.feedback-cancel-btn {
+  cursor: pointer;
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  font-feature-settings: "salt" on;
+  color: #141a33;
+  width: 100%;
+  height: 60px;
+  background: #f2f2f2;
+  border-radius: 14px;
+  border: 0;
+}
+
+.comments__footer {
+  box-sizing: border-box;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  box-shadow: 0px -24px 48px rgba(0, 18, 102, 0.06);
+}
+
+.comments__footer-btn {
+  cursor: pointer;
+  padding: 0;
+  width: 100%;
+  height: 60px;
+  background: #37c99e;
+  border-radius: 14px;
+  border: 0;
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  font-feature-settings: "salt" on;
+  color: #ffffff;
+}
+
+.comments__footer-btn:active {
+  background: #3bdbab;
+}
+
+.feedback-rating {
+  margin-bottom: 20px;
+}
+
+.comments__main {
+  margin-top: 55px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  height: calc(100vh - 162px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 23px 16px 0 16px;
+}
+
+.comments__main::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f9f9fd00;
+}
+
+.comments__main::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #dddde3;
+}
+
+.comments__main::-webkit-scrollbar-track {
+  background-color: #ffffff00;
+}
+
+.comments__item-wrap {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #dddde3;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.comments__item {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+}
+.comments__item-wrap:last-child {
+  border-bottom: 0px solid #dddde3;
+  margin-bottom: 20px;
+}
+
+.modal {
+  text-align: justify;
+}
+
+.comments__item-avatar {
+  width: 44px;
+  margin-right: 12px;
+}
+
+.comments__item-avatar-img {
+  width: 44px;
+  border-radius: 100%;
+}
+
+.comments__item-other {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.comments__item-name {
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: "salt" on;
+  color: #141a33;
+  margin-bottom: 3px;
+}
+
+.comments__item-dateAndRate {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  margin-left: -3px;
+  margin-bottom: 13px;
+}
+
+.comments__item-date {
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  font-feature-settings: "salt" on;
+  color: #7a7e8f;
+}
+
+.comments__item-text {
+  max-width: calc(100vw - 100px);
+  margin-bottom: 4px;
+  white-space: normal;
+  word-wrap: break-word;
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: "salt" on;
+  color: #141a33;
+  /* -webkit-line-clamp: 4; */
+  /* display: -webkit-box; */
+  /* -webkit-box-orient: vertical; */
+  /* overflow: hidden; */
+}
+
+.open {
+  max-height: none;
+  display: block;
+}
+
+.comments__item-text-more {
+  cursor: pointer;
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: "salt" on;
+  color: #37c99e;
+}
+
+.comments__firstReview {
+  width: 300px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.comments__firstReview-img {
+  margin-top: 64px;
+  margin-bottom: 12px;
+  width: 64px;
+}
+
+.comments__firstReview-title {
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 26px;
+  text-align: center;
+  letter-spacing: -0.92px;
+  font-feature-settings: "salt" on;
+  color: #141a33;
+  margin-bottom: 12px;
+}
+
+.comments__firstReview-text {
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  font-feature-settings: "salt" on;
+  color: #141a33;
+  margin-bottom: 32px;
+}
+
+.feedback-text {
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  font-feature-settings: "salt" on;
+  color: #141a33;
+  margin: 0 40px 20px 40px;
+}
+
+.comments__firstReview-btn {
+  cursor: pointer;
+  width: 169px;
+  height: 52px;
+  background: #37c99e;
+  border-radius: 14px;
+  border: 0;
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  font-feature-settings: "salt" on;
+  color: #ffffff;
+}
+
+.member-logo-img {
+  width: 36px;
+  border-radius: 100%;
+}
+
+.member-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  font-feature-settings: "salt" on;
+}
+
+.comments__item-reply-wrap {
+  width: 100%;
+  margin-top: 12px;
+  padding-left: 18px;
+  display: flex;
+}
+
+.comments__item-reply-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 100%;
+}
+
+.comments__item-reply {
+  width: 100%;
+  max-width: calc(100vw - 100px);
+  margin-left: 14px;
+  padding: 10px;
+  background: rgba(55, 201, 158, 0.12);
+  border-radius: 12px;
+}
+
+.comments__item-reply-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  gap: 8px;
+}
+
+.comments__item-title-text {
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: "salt" on;
+  color: #141a33;
+}
+
+.comments__firstReview-btn-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.block__header-link {
+  width: 100%;
+  text-decoration: none;
+}
+
+.comments__item-other-link {
+  text-decoration: none;
+}
+
+.comments__item-reply-title-img {
+  background-image: url(/../mini-app/src/img/verificationStar.svg);
+  width: 16px;
+  height: 16px;
+}
+
+.comments__item-reply-text {
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: "salt" on;
+  color: #141a33;
+}
+
+.comments__item-reply-btn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  width: calc(100% - 56px);
+  /* max-width: 150px; */
+  height: 40px;
+  background: #37c99e;
+  border-radius: 10px;
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  font-feature-settings: "salt" on;
+  color: #ffffff;
+  margin-left: 56px;
+  margin-top: 12px;
+}
+
+.chosenGroup {
+  height: calc(100% - 55px);
+}
+
+/* .permitDenied {
+  height: calc(100% - 55px);
+} */
+
+.change {
+  background: #f2f2f2;
+  color: #141a33;
+}
+
+.comments__change {
+  width: 100%;
+  display: flex;
+  gap: 12px;
+}
+
+.comments__change-item {
+  cursor: pointer;
+  padding: 10px 16px;
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: "salt" on;
+  color: #141a33;
+  height: 40px;
+  width: 60px;
+  background: #eef0f3;
+  border-radius: 52px;
+}
+
+.comments__change-item-noReply {
+  cursor: pointer;
+  padding: 10px 16px;
+  width: 143px;
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: "salt" on;
+  color: #141a33;
+  height: 40px;
+  background: #eef0f3;
+  border-radius: 52px;
+}
+
+.current {
+  background: #37c99e;
+  color: #ffffff;
+}
+
+.loader-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.424);
+}
+
+.loader {
+  color: #000000;
+  font-size: 45px;
+  text-indent: -9999em;
+  overflow: hidden;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  position: relative;
+  transform: translateZ(0);
+  animation: mltShdSpin 1.7s infinite ease, round 1.7s infinite ease;
+}
+
+.block__name {
+  overflow: hidden;
+  max-height: 40px;
+  text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 420px) {
+  .member-representatives {
+    margin-top: -5px;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .member-title {
+    width: 60%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+
+@keyframes mltShdSpin {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em,
+      -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em,
+      -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em,
+      -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em,
+      -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em,
+      -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em,
+      -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+
+@keyframes round {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

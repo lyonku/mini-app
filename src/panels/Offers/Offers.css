@@ -1,0 +1,653 @@
+body {
+  background-color: #ffffff;
+}
+
+.offers {
+  height: 100%;
+  background-color: #ffffff;
+}
+
+body::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f9f9fd;
+}
+
+body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #37c99da4;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: #ffffff;
+}
+
+.offers__header {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  gap: 16px;
+}
+
+.header-Back {
+  cursor: pointer;
+  width: 36px;
+}
+
+.OffersHeader__logo {
+  display: flex;
+  align-items: center;
+}
+
+.OffersHeader__logo-img {
+  height: 32px;
+  width: 32px;
+}
+
+.OffersHeader__logo-text {
+  margin-left: 8px;
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  font-feature-settings: "salt" on;
+  color: #141a33;
+}
+
+.offers__main {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
+  overflow: auto;
+  height: calc(100% - 56px);
+}
+
+.offers__available {
+  margin-bottom: 20px;
+}
+.offers__main .title {
+  padding: 8px 16px 18px 0;
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  /* identical to box height, or 117% */
+
+  letter-spacing: -0.92px;
+  font-feature-settings: "salt" on;
+
+  /* Gray / Gray 1 */
+
+  color: #141a33;
+}
+
+.offers__main::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f9f9fd00;
+}
+
+.offers__main::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #dddde3;
+}
+
+.offers__main::-webkit-scrollbar-track {
+  background-color: #ffffff00;
+}
+
+.blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  background-color: #ffffff;
+  margin: 0;
+  border: 1px solid #f6f6f8;
+  box-shadow: 0px 16px 24px rgba(0, 18, 102, 0.08);
+  border-radius: 12px;
+  order: 0;
+  padding: 12px;
+}
+
+.card-withoutMember {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #ffffff;
+  margin: 0;
+  border: 1px solid #f6f6f8;
+  box-shadow: 0px 16px 24px rgba(0, 18, 102, 0.08);
+  border-radius: 12px;
+  order: 0;
+  padding: 12px;
+}
+
+.card-withoutMember .block__header {
+  margin-bottom: 0;
+}
+
+.block__header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  /* margin-bottom: 12px; */
+  gap: 15px;
+  margin-right: 20px;
+}
+
+.block__chance {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.block__chance-img {
+  width: 12px;
+}
+
+.block__logo {
+  width: 100%;
+}
+
+.block__chance-total {
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: right;
+  font-feature-settings: "salt" on;
+  color: #141a33;
+  align-self: baseline;
+}
+
+.block__chance-title {
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: right;
+  font-feature-settings: "salt" on;
+  color: #7a7e8f;
+}
+
+.block__logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.block__logo-img {
+  width: 40px;
+  border-radius: 100%;
+  height: 40px;
+}
+
+.block__name {
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: "salt" on;
+  color: #141a33;
+  align-self: center;
+}
+
+.block__btns {
+  text-decoration: none;
+  /* width: 100%; */
+  display: flex;
+  gap: 6px;
+}
+
+.block__btns-getMoney {
+  cursor: pointer;
+  padding: 0;
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  font-feature-settings: "salt" on;
+  color: #ffffff;
+  width: 156px;
+  height: 40px;
+  background: #37c99e;
+  border-radius: 10px;
+  border: 0;
+}
+
+.card-withoutMember .block__btns-getMoney {
+  width: 225px;
+}
+
+.block__btns-getMoney:active {
+  background: #3bdbab;
+}
+
+.block__btns-reviews {
+  gap: 3px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  width: 64px;
+  height: 40px;
+  background: #f2f2f2;
+  border-radius: 10px;
+  border: 0;
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  font-feature-settings: "salt" on;
+}
+
+.card__interpreter {
+  display: flex;
+  margin-top: 2px;
+  margin-bottom: 12px;
+}
+
+.card__interpreter-img {
+  width: 16px;
+  margin-right: 2px;
+}
+
+.card__interpreter span {
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  font-feature-settings: "salt" on;
+  color: #37c99e;
+}
+
+.delimeter {
+  width: 100%;
+  margin: 18px 0 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.delimeter-row {
+  width: 100%;
+  border-bottom: 1px solid #eef0f3;
+}
+
+.delimeter__title {
+  margin-bottom: 8px;
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  font-feature-settings: "salt" on;
+  color: #141a33;
+}
+
+.delimeter__text {
+  margin-bottom: 24px;
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  font-feature-settings: "salt" on;
+  color: #7a7e8f;
+}
+
+.comments__footer {
+  align-self: end;
+  background-color: #ffffff;
+  padding: 12px 12px 34px 12px;
+}
+
+.block__btns-reviews-count {
+  margin-left: 4px;
+  display: none;
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  font-feature-settings: "salt" on;
+  color: #141a33;
+}
+
+.withoutMember-form:last-child {
+  margin-bottom: 15px;
+}
+
+.block__btns-title {
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: right;
+  font-feature-settings: "salt" on;
+  color: #141a33;
+}
+
+.block__header.new {
+  padding: 12px;
+  margin-right: 0;
+  width: 100%;
+}
+
+.block__btns-wrap {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 10px;
+}
+
+.block__btns-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  font-feature-settings: "salt" on;
+  color: #000000;
+  height: 40px;
+  background: #f2f2f2;
+  border-radius: 10px;
+  border: 0;
+}
+
+.block__btns-btn-wrap {
+  width: 100%;
+  padding: 0 12px;
+  margin-bottom: 24px;
+}
+
+.block__date {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.block__date-title {
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: right;
+  color: #141a33;
+}
+
+.block__date-text {
+  text-align: right;
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #7a7e8f;
+}
+
+.block__btns-current {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.block__btns-current-left {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 12px;
+}
+
+.current-left-title {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #7a7e8f;
+}
+
+.current-left-title span {
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #141a33;
+}
+
+.current-left-bar {
+  height: 10px;
+  width: 100%;
+  /* background: #ebebeb; */
+  border-radius: 50px;
+  margin-bottom: 24px;
+}
+
+.currentZaim {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  padding: 0;
+}
+
+.block__btns-leaveFeedback {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  background: #65a9ff;
+  box-shadow: 0px -7px 16px rgba(0, 18, 102, 0.2);
+  border-radius: 12px;
+  padding: 16px 12px;
+}
+
+.leaveFeedback__body {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.leaveFeedback__body-img {
+  width: 32px;
+}
+
+.leaveFeedback__body-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.leaveFeedback__body-title {
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: #ffffff;
+}
+
+.leaveFeedback__body-subtext {
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #ffffff;
+}
+
+.leaveFeedback-btn {
+  cursor: pointer;
+  font-family: "Averta CY";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  font-feature-settings: "salt" on;
+  color: #141a33;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 16px;
+  gap: 4px;
+  height: 40px;
+  background: #ffffff;
+  border-radius: 10px;
+}
+
+.leaveFeedback-btn span {
+  color: #141a33;
+  margin-top: -1px;
+}
+
+.offers__available .blocks {
+  display: block;
+}
+
+.mySwiper {
+  box-shadow: 0px 16px 24px rgba(0, 18, 102, 0.08);
+}
+
+.blocks-desktop {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.blocks-desktop .currentZaim {
+  width: 49%;
+}
+
+.block__btns-btn-img {
+  width: 14px;
+  margin-right: 5px;
+}
+
+@media screen and (max-width: 580px) {
+  .block__header.new {
+    flex-wrap: nowrap;
+    flex-direction: row;
+    gap: 5px;
+  }
+
+  .block__date {
+    /* width: 50%; */
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .currentZaim {
+    padding-bottom: 30px;
+  }
+
+  .currentZaimOne {
+    padding-bottom: 0px;
+  }
+
+  .block__btns {
+    width: 100%;
+  }
+  .block__btns-wrap {
+    width: 100%;
+  }
+  .block__btns-btn {
+    width: 100%;
+  }
+
+  .card-withoutMember {
+    display: block;
+  }
+
+  .card-withoutMember .block__btns-getMoney {
+    max-width: none;
+  }
+
+  .card-withoutMember .block__header {
+    margin-bottom: 12px;
+  }
+
+  .card-withoutMember .block__btns-getMoney {
+    width: 100%;
+  }
+
+  .block_btns-link {
+    width: 100%;
+  }
+
+  .card .block__header {
+    margin-bottom: 12px;
+    margin-right: 0;
+  }
+
+  .card {
+    flex-direction: column;
+  }
+
+  .card .block__btns-getMoney {
+    width: 100%;
+  }
+
+  .block__btns-reviews {
+    width: 100%;
+  }
+
+  .block__btns-reviews-count {
+    display: block;
+  }
+
+  .block__logo {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .card .block__header {
+    margin-right: 10px;
+  }
+}
