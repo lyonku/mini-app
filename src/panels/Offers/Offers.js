@@ -16,16 +16,51 @@ const Offers = ({
   goToPage,
   rngValue,
   groups,
-  groupsWithout,
+  handleOfferClick,
   user,
   waiting,
   addLastDate,
   groupsOffers,
   doOffers,
+  notificationEnter,
+  adsEnter,
+  firstLoad,
+  clickedOffers,
 }) => {
   const [screenWidth, setScreenWidth] = useState();
   const [curent, setCurent] = useState([]);
   const [curentCount, setCurentCount] = useState(false);
+  const [sortedGroups, setSortedGroups] = useState([]);
+
+  useEffect(() => {
+    let copy = [...groups];
+
+    // Функция сравнения для сортировки массива объектов
+    function customSort(objA, objB) {
+      const idA = objA.offerId;
+      const idB = objB.offerId;
+
+      if (
+        clickedOffers.includes("" + idA) &&
+        clickedOffers.includes("" + idB)
+      ) {
+        return (
+          clickedOffers.indexOf("" + idA) - clickedOffers.indexOf("" + idB)
+        );
+      }
+
+      if (clickedOffers.includes("" + idA)) {
+        return 1;
+      }
+
+      if (clickedOffers.includes("" + idB)) {
+        return -1;
+      }
+      return 0;
+    }
+    copy.sort(customSort);
+    setSortedGroups(copy);
+  }, []);
 
   const differentChance = {
     high: ["Высокий"],
@@ -91,6 +126,7 @@ const Offers = ({
                             addLastDate={addLastDate}
                             doOffers={doOffers}
                             curentCount={curentCount}
+                            notificationEnter={notificationEnter}
                           />
                         </SwiperSlide>
                       );
@@ -111,6 +147,8 @@ const Offers = ({
                           addLastDate={addLastDate}
                           doOffers={doOffers}
                           curentCount={curentCount}
+                          notificationEnter={notificationEnter}
+                          adsEnter={adsEnter}
                         />
                       );
                     }
@@ -122,8 +160,8 @@ const Offers = ({
         )}
         <div className="title">Доступные предложения</div>
         <div className="blocks">
-          {groups
-            .map((group, index) => {
+          {sortedGroups.map((group, index) => {
+            if (group.id) {
               if (
                 (!group.offerInfo ||
                   waiting.length < 1 ||
@@ -131,83 +169,95 @@ const Offers = ({
                 !group?.isDublicate
               ) {
                 return (
-                  <OffersCard
-                    rngValue={rngValue}
-                    group={group}
-                    goToPage={goToPage}
+                  <div
                     key={group.id}
-                    user={user}
-                    doOffers={doOffers}
-                  />
+                    onClick={() => {
+                      handleOfferClick(group.offerId);
+                      _tmr.push({
+                        type: "reachGoal",
+                        id: 3377560,
+                        value: 2,
+                        goal: "CompanyTransition",
+                      });
+                    }}
+                  >
+                    <OffersCard
+                      handleOfferClick={handleOfferClick}
+                      rngValue={rngValue}
+                      group={group}
+                      goToPage={goToPage}
+                      user={user}
+                      doOffers={doOffers}
+                      notificationEnter={notificationEnter}
+                      adsEnter={adsEnter}
+                      firstLoad={firstLoad}
+                    />
+                  </div>
                 );
               }
-            })
-            .sort((a, b) =>
-              a.props.group.averageRating < b.props.group.averageRating ? 1 : -1
-            )}
-        </div>
-
-        <div className="delimeter">
-          <div className="delimeter-row"></div>
-          <img className="delimeter-img" src={delimeter} />
-          <div className="delimeter-row"></div>
-        </div>
-        <div className="delimeter__title">
-          Дальше организации без представителей
-        </div>
-        <div className="delimeter__text">
-          Такие организации не отвечают на отзывы пользователей
-        </div>
-
-        <div className="blocks">
-          {groupsWithout.map((group, index) => {
-            return (
-              <form className="withoutMember-form" key={index}>
-                <div className="card-withoutMember">
-                  <div className="block__header">
+            } else {
+              return (
+                <form
+                  className="withoutMember-form"
+                  key={index}
+                  onClick={() => {
+                    handleOfferClick(group.offerId);
+                    _tmr.push({
+                      type: "reachGoal",
+                      id: 3377560,
+                      value: 2,
+                      goal: "CompanyTransition",
+                    });
+                  }}
+                >
+                  <div className="card-withoutMember">
+                    <div className="block__header">
+                      <a
+                        href={`${group.actionSrc}${"&vkid=" + user.id}${
+                          notificationEnter
+                            ? "&utm_medium=push"
+                            : adsEnter
+                            ? "&utm_medium=ads"
+                            : ""
+                        }`}
+                        target="_blank"
+                        className="block__header-link"
+                      >
+                        <div className="block__logo">
+                          <img
+                            src={group.imgSrc}
+                            alt="logo"
+                            className="block__logo-img"
+                          />
+                          <div className="block__name">{group.name}</div>
+                        </div>
+                      </a>
+                    </div>
                     <a
-                      href={`${group.actionSrc}${
-                        group.offerId == 282 || group.offerId == 283
-                          ? ""
-                          : "&vkid=" + user.id
+                      className="block__btns"
+                      href={`${group.actionSrc}&vkid=${user.id}${
+                        notificationEnter
+                          ? "&utm_medium=push"
+                          : adsEnter
+                          ? "&utm_medium=ads"
+                          : ""
                       }`}
                       target="_blank"
-                      className="block__header-link"
                     >
-                      <div className="block__logo">
-                        <img
-                          src={group.imgSrc}
-                          alt="logo"
-                          className="block__logo-img"
-                        />
-                        <div className="block__name">{group.name}</div>
-                      </div>
+                      <input
+                        type="button"
+                        value={
+                          firstLoad
+                            ? "Получить " + rngValue.toLocaleString("ru") + " ₽"
+                            : "Получить деньги"
+                        }
+                        className="block__btns-getMoney"
+                      />
                     </a>
-
-                    {/* <div className="block__chance">
-                      <div className="block__chance-total">
-                        <span>{differentChance[group.chance]}</span>
-                        <div className="block__chance-title">
-                          Шанс одобрения
-                        </div>
-                      </div>
-                      <Chance state={group?.chance} />
-                    </div> */}
                   </div>
-                  <a
-                    className="block__btns"
-                    href={`${group.actionSrc}&vkid=${user.id}`}
-                    target="_blank"
-                  >
-                    <input
-                      type="button"
-                      value={"Получить " + rngValue.toLocaleString("ru") + " ₽"}
-                      className="block__btns-getMoney"
-                    />
-                  </a>
-                </div>
-              </form>
-            );
+                </form>
+              );
+            }
           })}
         </div>
       </div>

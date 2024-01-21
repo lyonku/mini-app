@@ -46,8 +46,14 @@ const App = () => {
   const [popout2, setPopout2] = useState(null);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
 
+  const [firstLoad, setFirstLoad] = useState(true);
+  const [clickedOffers, setClickedOffers] = useState([]);
+
   const [retry, setRetry] = useState({});
   const [offersLoad, setOffersLoad] = useState(false);
+
+  const [notificationEnter, setNotificationEnter] = useState(false);
+  const [adsEnter, setAdsEnter] = useState(false);
 
   useEffect(async () => {
     let rcDefaults = require("./remote_config_defaults.json");
@@ -58,15 +64,15 @@ const App = () => {
       .then(() => {
         const val = remoteConfig.getValue("members");
         let json = JSON.parse(val._value);
-        setGroupsFull(json.withMember);
-        setGroups(json.withMember);
-        setGroupsWithout(json.withoutMember);
+        setGroupsFull(json);
+        setGroups(json);
+        // setGroupsWithout(json.withoutMember);
       })
       .catch((err) => {
         let json1 = JSON.parse(remoteConfig.defaultConfig.members);
-        setGroupsFull(json1.withMember);
-        setGroups(json1.withMember);
-        setGroupsWithout(json1.withoutMember);
+        setGroupsFull(json1);
+        setGroups(json1);
+        // setGroupsWithout(json1.withoutMember);
       });
   }, []);
 
@@ -78,12 +84,14 @@ const App = () => {
       let json = await response.json();
       let copy = Object.assign([], groupsFull);
       for (const item of copy) {
-        if (json[item.id + "_" + item.name][0] == "NaN") {
-          item.averageRating = "";
-        } else {
-          item.averageRating = json[item.id + "_" + item.name][0];
+        if (item.id) {
+          if (json[item.id + "_" + item.name][0] == "NaN") {
+            item.averageRating = "";
+          } else {
+            item.averageRating = json[item.id + "_" + item.name][0];
+          }
+          item.reviewsCount = json[item.id + "_" + item.name][1];
         }
-        item.reviewsCount = json[item.id + "_" + item.name][1];
       }
       setGroupsFull(copy);
       0;
@@ -112,6 +120,7 @@ const App = () => {
     setGroupsOffers(groupsOffers);
     setGroupsFull(copy);
   }
+
   // User initialization
   useEffect(() => {
     if (groups.length > 1) {
@@ -131,11 +140,23 @@ const App = () => {
                   data.nextAllowNotifications = 0;
                   data.submited.conversionsWrittenIds = [];
 
+                  // if (doc.data().firstLoad == false) {
+                  //   goToPage("offers");
+                  //   setFirstLoad(false);
+                  // }
+
+                  if (doc.data().clickedOffers) {
+                    setClickedOffers(doc.data().clickedOffers);
+                  }
+
                   if (doc.data().nextAllowNotifications) {
                     data.nextAllowNotifications =
                       +doc.data().nextAllowNotifications;
                   }
-                  getNotifications(data.nextAllowNotifications);
+
+                  if (doc.data().nextAllowNotifications == 0) {
+                    getNotifications(0);
+                  }
 
                   if (doc.data().conversions) {
                     for (const item of doc.data().conversions) {
@@ -168,6 +189,34 @@ const App = () => {
       fetchUser();
     }
   }, [groups, trigger]);
+
+  const handleOfferClick = async (offer) => {
+    let param = window.location.href;
+    let totalParam = param.slice(param.indexOf("vk_access"));
+
+    const response = await fetch(
+      `https://europe-central2-loans-vk-app.cloudfunctions.net/set-offers-click?${totalParam}&offer=${offer}`,
+      {
+        method: "GET",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  };
+
+  // useEffect(async () => {
+  //   bridge
+  //     .send("VKWebAppAddToFavorites")
+  //     .then((data) => {
+  //       if (data.result) {
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
   // Finding group admin rights for a user
   useEffect(() => {
@@ -323,36 +372,47 @@ const App = () => {
 
     bridge
       .send("VKWebAppGetLaunchParams")
-      .then((data) => {
+      .then(async (data) => {
+        let param1 = window.location.href;
+        let totalParam1 = param1.slice(param1.indexOf("vk_access"));
+        if (data.vk_ref.indexOf("notifications") != -1) {
+          setNotificationEnter(true);
+        }
+        if (
+          totalParam1.indexOf("ads") != -1 ||
+          data.vk_ref.indexOf("feed_ads") != -1
+        ) {
+          setAdsEnter(true);
+        }
         if (
           !data.vk_are_notifications_enabled &&
           currentDate > notificationDate
         ) {
-          bridge
-            .send("VKWebAppAllowNotifications")
-            .then((data) => {
-              if (data.result) {
-                console.log("AllowNotificationsGood");
-              } else {
-                console.log("AllowNotificationsError");
-              }
-            })
-            .catch(async (error) => {
-              let param = window.location.href;
-              let totalParam = param.slice(param.indexOf("vk_access"));
+          // bridge
+          //   .send("VKWebAppAllowNotifications")
+          //   .then((data) => {
+          //     if (data.result) {
+          //       console.log("AllowNotificationsGood");
+          //     } else {
+          //       console.log("AllowNotificationsError");
+          //     }
+          //   })
+          //   .catch(async (error) => {
+          let param = window.location.href;
+          let totalParam = param.slice(param.indexOf("vk_access"));
 
-              const response = await fetch(
-                `https://europe-central2-loans-vk-app.cloudfunctions.net/add-notification-date?${totalParam}`,
-                {
-                  method: "GET",
-                  mode: "no-cors",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                }
-              );
-              // console.log(error);
-            });
+          const response = await fetch(
+            `https://europe-central2-loans-vk-app.cloudfunctions.net/add-notification-date?${totalParam}`,
+            {
+              method: "GET",
+              mode: "no-cors",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          // console.log(error);
+          // });
         }
       })
       .catch((error) => {
@@ -533,6 +593,9 @@ const App = () => {
                 />
                 <Offers
                   id="offers"
+                  firstLoad={firstLoad}
+                  handleOfferClick={handleOfferClick}
+                  clickedOffers={clickedOffers}
                   goToPage={goToPage}
                   rngValue={rngValue}
                   groups={groupsFull}
@@ -543,6 +606,8 @@ const App = () => {
                   setWaiting={setWaiting}
                   groupsOffers={groupsOffers}
                   doOffers={doOffers}
+                  notificationEnter={notificationEnter}
+                  adsEnter={adsEnter}
                 />
                 <Comments
                   id="comments"

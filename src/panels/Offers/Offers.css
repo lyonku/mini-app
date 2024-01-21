@@ -60,7 +60,7 @@ body::-webkit-scrollbar-track {
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
-  padding: 0 16px;
+  padding: 0 32px;
   overflow: auto;
   height: calc(100% - 56px);
 }
@@ -102,7 +102,8 @@ body::-webkit-scrollbar-track {
 .blocks {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
+  margin-bottom: 5px;
 }
 
 .card {
@@ -337,7 +338,7 @@ body::-webkit-scrollbar-track {
 }
 
 .withoutMember-form:last-child {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .block__btns-title {

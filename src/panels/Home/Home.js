@@ -53,13 +53,14 @@ const Home = ({ goToPage, onChange, rngValue, load }) => {
         <div className="block-form__btnform">
           <div
             className="block-form__button"
-            onClick={() => goToPage("offers")}
+            onClick={() => {
+              goToPage("offers");
+            }}
           >
-            {load ? <span className="loaderBtn"></span> : "Подобрать займ"}
+            {load ? <span className="loaderBtn"></span> : "Получить займ"}
           </div>
         </div>
       </div>
-
       <div className="block__second">
         <div className="block__info">
           <img src={info} className="block__info-img" />
@@ -69,7 +70,9 @@ const Home = ({ goToPage, onChange, rngValue, load }) => {
           </div>
         </div>
         <div
-          onClick={() => goToPage("membership")}
+          onClick={() => {
+            goToPage("membership");
+          }}
           className="block-membership"
         >
           Я – представитель МФО/МКК

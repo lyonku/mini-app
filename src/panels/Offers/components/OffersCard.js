@@ -14,6 +14,9 @@ function OffersCard({
   addLastDate,
   doOffers,
   curentCount,
+  notificationEnter,
+  adsEnter,
+  firstLoad,
 }) {
   const [doReview, setDoReview] = useState(false);
   const [colorDate, setColorDate] = useState("");
@@ -103,6 +106,12 @@ function OffersCard({
             group.offerId == 282 || group.offerId == 283
               ? ""
               : "&vkid=" + user.id
+          }${
+            notificationEnter
+              ? "&utm_medium=push"
+              : adsEnter
+              ? "&utm_medium=ads"
+              : ""
           }`}
           target="_blank"
           className="block__header-link"
@@ -114,11 +123,11 @@ function OffersCard({
         </a>
         {!doReview ? (
           <div className="block__chance">
-            <div className="block__chance-total">
+            {/* <div className="block__chance-total">
               <span>{differentChance[group.chance]}</span>
               <div className="block__chance-title">Шанс одобрения</div>
             </div>
-            <Chance state={group.chance} />
+            <Chance state={group.chance} /> */}
           </div>
         ) : (
           <div className="block__date">
@@ -231,13 +240,23 @@ function OffersCard({
                 group.offerId == 282 || group.offerId == 283
                   ? ""
                   : "&vkid=" + user.id
+              }${
+                notificationEnter
+                  ? "&utm_medium=push"
+                  : adsEnter
+                  ? "&utm_medium=ads"
+                  : ""
               }`}
               target="_blank"
               className="block_btns-link"
             >
               <input
                 type="button"
-                value={"Получить " + rngValue.toLocaleString("ru") + " ₽"}
+                value={
+                  firstLoad
+                    ? "Получить " + rngValue.toLocaleString("ru") + " ₽"
+                    : "Получить деньги"
+                }
                 className="block__btns-getMoney"
               />
             </a>
